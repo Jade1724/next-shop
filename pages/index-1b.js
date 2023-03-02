@@ -1,4 +1,5 @@
-// Options 1: Fetch products on the server side (in getStaticProps)
+// Options 1b: Fetch products on the server side (in getStaticProps)
+// but with Incremental Static Regeneration
 import { useEffect } from "react";
 import Head from "next/head";
 import Title from "@/components/Title";
@@ -7,9 +8,9 @@ import { getProducts } from "@/lib/product";
 export async function getStaticProps() {
   console.log("[HomePage] getStaticProps()");
   const products = await getProducts();
-  return { props: { products } };
+  return { props: { products }, revalidate: 30 };
 }
-export default function HomePage({products}) {
+export default function HomePage({ products }) {
   useEffect(() => {});
   return (
     <>
