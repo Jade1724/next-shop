@@ -9,8 +9,7 @@ export async function getStaticProps() {
   const products = await getProducts();
   return { props: { products } };
 }
-export default function HomePage(context) {
-  console.log(context);
+export default function HomePage({products}) {
   useEffect(() => {});
   return (
     <>
@@ -19,11 +18,11 @@ export default function HomePage(context) {
       </Head>
       <main className="p-4">
         <Title>Next Shop</Title>
-        {/* <ul>
+        <ul>
           {products.map((product) => (
             <li key={product.id}>{product.title}</li>
           ))}
-        </ul> */}
+        </ul>
       </main>
     </>
   );
