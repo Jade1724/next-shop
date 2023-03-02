@@ -1,5 +1,4 @@
 // Options 1c: fetch products on the server side (in getServerSideProps)
-import { useEffect } from "react";
 import Head from "next/head";
 import Title from "@/components/Title";
 import { getProducts } from "@/lib/product";

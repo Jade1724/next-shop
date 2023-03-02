@@ -1,5 +1,4 @@
 // Options 1a: Fetch products on the server side (in getStaticProps)
-import { useEffect } from "react";
 import Head from "next/head";
 import Title from "@/components/Title";
 import { getProducts } from "@/lib/product";
@@ -10,7 +9,6 @@ export async function getStaticProps() {
   return { props: { products } };
 }
 export default function HomePage({products}) {
-  useEffect(() => {});
   return (
     <>
       <Head>
