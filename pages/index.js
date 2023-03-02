@@ -8,12 +8,12 @@ export async function getStaticProps() {
   const products = await getProducts();
   return {
     props: { products },
-    revalidate: 5 * 60, // seconds
+    revalidate: parseInt(process.env.REVALIDATE_SECONDS),
   };
 }
 
 export default function HomePage({ products }) {
-  console.log("[HomePage] render: ", products);
+  console.log("[HomePage] render: ");
   return (
     <>
       <Head>
