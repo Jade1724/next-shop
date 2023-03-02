@@ -15,6 +15,7 @@ export async function getStaticProps({ params: { id } }) {
   const product = await getProduct(id);
   return {
     props: { product },
+    revalidate: 5 * 60,
   };
 }
 
