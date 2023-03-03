@@ -15,7 +15,7 @@ async function handler(req, res) {
       body: JSON.stringify({ identifier: email, password }),
     });
     res.status(200)
-    .setHeader("Set-Cookie", cookie.serialize("jtw", jwt, {
+    .setHeader("Set-Cookie", cookie.serialize("jwt", jwt, {
         path: '/api',
         httpOnly: true,
     }))
