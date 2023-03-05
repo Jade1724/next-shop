@@ -1,20 +1,25 @@
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useQuery } from "react-query";
 import { fetchJson } from "@/lib/api";
 
+
 function NavBar() {
-  const [user, setUser] = useState();
-  useEffect(() => {
-    (async () => {
-      try {
-        const user = await fetchJson("/api/user");
-        setUser(user);
-      } catch (err) {
-        // Not signed in
-      }
-    })();
-  }, []);
-  console.log("[NavbBar] user: ", user);
+ const query = useQuery("user", async () => {
+    try {
+      return await fetchJson("/api/user");
+    } catch (err) {
+      return undefined;
+    }
+  }, {
+    cacheTime: Infinity, 
+    staleTime: 30_000,
+  });
+  const user = query.data;
+ 
+  const handleSignOut = async () => {
+    await fetchJson("/api/logout");
+    setUser(undefined);
+  };
 
   return (
     <nav className="px-2 py-1 text-sm">
@@ -27,7 +32,9 @@ function NavBar() {
           <>
             <li>{user.name}</li>
             <li>
-              <Link href="/sign-in">Sign Out</Link>
+              <Link href="/sign-in" onClick={handleSignOut}>
+                Sign Out
+              </Link>
             </li>
           </>
         ) : (
